@@ -39,11 +39,20 @@ public class AssessmentApplication {
 	}
 
 	@GetMapping("/conversions/mtok")
-	public ResponseEntity<String> convertMilestoKilometers(@RequestParam(value = "miles") Double miles) throws Exception{
+	public ResponseEntity<String> convertMilesToKilometers(@RequestParam(value = "miles") Double miles) throws Exception{
 		if(miles != null){
-			return new ResponseEntity<>(String.format("Kilometers : %.2f", Double.valueOf(miles) * 1.609D ), HttpStatus.OK);
+			return new ResponseEntity<>(String.format("Kilometers : %.3f", Double.valueOf(miles) * 1.609D ), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<>("Please enter a valid miltes value", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Please enter a valid miles value", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@GetMapping("/conversions/ktom")
+	public ResponseEntity<String> convertKilometersToMiles(@RequestParam(value = "km")Double km) throws Exception{
+		if(km != null){
+			return new ResponseEntity<>(String.format("Miles : %.3f", Double.valueOf(km) / 1.609D), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Please enter a valid kilometer value", HttpStatus.BAD_REQUEST);
 		}
 	}
 
